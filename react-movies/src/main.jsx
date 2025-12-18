@@ -16,6 +16,10 @@ import MovieReviewPage from './pages/movieReviewPage';
 import TopRatedMoviesPage from './pages/topRatedMoviesPage';
 import TrendingMoviesPage from './pages/trendingMoviessPage';
 import WatchLaterMoviesPage from './pages/watchLaterMoviesPage';
+import AuthContextProvider from "./contexts/authContext";
+import ProtectedRoutes from "./protectedRoutes";
+import LoginPage from "./pages/auth/loginPage";
+import SignupPage from "./pages/auth/signupPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +34,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
       <BrowserRouter>
         <AlertProvider>
           <SiteHeader />
@@ -50,6 +55,7 @@ const App = () => {
         </MoviesContextProvider>
       </AlertProvider>
       </BrowserRouter>
+      </AuthContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
