@@ -18,8 +18,8 @@ import TrendingMoviesPage from './pages/trendingMoviessPage';
 import WatchLaterMoviesPage from './pages/watchLaterMoviesPage';
 import AuthContextProvider from "./contexts/authContext";
 import ProtectedRoutes from "./protectedRoutes";
-import LoginPage from "./pages/auth/loginPage";
-import SignupPage from "./pages/auth/signupPage";
+import LoginPage from "./pages/loginPage";
+import SignupPage from "./pages/signupPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,15 +40,19 @@ const App = () => {
           <SiteHeader />
           <MoviesContextProvider>
             <Routes>
-            <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+              <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+              <Route path="/movies/watch-later" element={<WatchLaterMoviesPage />} />
+            </Route>
             <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
             <Route path="/movies/:id" element={<MoviePage />} />
-            <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
             <Route path="/movies/now-playing" element={<NowPlayingPage />} />
             <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
             <Route path="/movies/trending" element={<TrendingMoviesPage />} />
-            <Route path="/movies/watch-later" element={<WatchLaterMoviesPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={ <Navigate to="/" /> } />
           </Routes>
