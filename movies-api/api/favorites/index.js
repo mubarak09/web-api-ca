@@ -1,20 +1,20 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
-import Favourite from "./favouriteModel";
+import Favorite from "./favoriteModel";
 
 const router = express.Router(); // eslint-disable-line
 
 // GET logged-in user's favourites
 router.get("/", asyncHandler(async (req, res) => {
-  const favourites = await Favourite.find({ userId: req.user._id });
-  res.status(200).json(favourites);
+  const favorites = await Favorite.find({ userId: req.user._id });
+  res.status(200).json(favorites);
 }));
 
 // POST add a favourite (logged-in user)
 router.post("/", asyncHandler(async (req, res) => {
   const { movieId, title, poster_path } = req.body;
 
-  const fav = await Favourite.create({
+  const fav = await Favorite.create({
     userId: req.user._id,
     movieId,
     title,
@@ -28,7 +28,7 @@ router.post("/", asyncHandler(async (req, res) => {
 router.delete("/:movieId", asyncHandler(async (req, res) => {
   const movieId = Number(req.params.movieId);
 
-  const result = await Favourite.deleteOne({
+  const result = await Favorite.deleteOne({
     userId: req.user._id,
     movieId,
   });
@@ -36,7 +36,7 @@ router.delete("/:movieId", asyncHandler(async (req, res) => {
   if (result.deletedCount) {
     res.status(204).json();
   } else {
-    res.status(404).json({ code: 404, msg: "Favourite not found" });
+    res.status(404).json({ code: 404, msg: "Favorite not found" });
   }
 }));
 

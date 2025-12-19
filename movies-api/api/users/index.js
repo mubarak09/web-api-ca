@@ -25,7 +25,7 @@ router.post('/', asyncHandler(async (req, res) => {
     } catch (error) {
         // Log the error and return a generic error message
         console.error(error);
-        res.status(500).json({ success: false, msg: 'Internal server error.' });
+        res.status(500).json({ success: false, msg: 'Internal server error. Duplicate User' });
     }
 }));
 

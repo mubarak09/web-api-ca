@@ -182,3 +182,73 @@ export const getMovie = (args) => {
     });
   };
   
+export const getFavorites = () => {
+  return fetch(
+    `http://localhost:8080/api/favorites`,
+    {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.message || "Failed to fetch favorites");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error;
+  });
+};
+
+export const addFavorite = (movie) => {
+  return fetch(
+    `http://localhost:8080/api/favorites`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': window.localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        movieId: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path
+      })
+    }
+  ).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.message || "Failed to add favorite");
+      });
+    }
+    return response.json();
+  })
+  .catch((error) => {
+    throw error;
+  });
+};
+
+export const deleteFavorite = (movieId) => {
+  return fetch(
+    `http://localhost:8080/api/favorites/${movieId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+  ).then((response) => {
+    if (!response.ok && response.status !== 204) {
+      return response.json().then((error) => {
+        throw new Error(error.message || "Failed to delete favorite");
+      });
+    }
+    return response;
+  })
+  .catch((error) => {
+    throw error;
+  });
+};

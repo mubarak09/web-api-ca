@@ -5,7 +5,7 @@ import usersRouter from './api/users';
 import moviesRouter from './api/movies';   
 import cors from 'cors'; 
 import authenticate from './authenticate';
-import favouritesRouter from "./api/favourites";
+import favoritesRouter from "./api/favorites";
 
 
 dotenv.config();
@@ -27,13 +27,13 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/api/tasks', authenticate);
+// app.use('/api/tasks', authenticate);
 
 app.use('/api/users', usersRouter);
 
 app.use('/api/movies', moviesRouter);
 
-app.use("/api/favourites", authenticate, favouritesRouter);
+app.use("/api/favorites", authenticate, favoritesRouter);
 
 app.use(errHandler);
 
