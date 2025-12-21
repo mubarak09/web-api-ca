@@ -25,7 +25,7 @@ const FavoriteMoviesPage = () => {
     poster_path: fav.poster_path,
     release_date: fav.release_date,
     vote_average: 0,
-    favorite: true, // force the heart avatar to show
+    favorite: true,
   }));
 
   const favIds = movies.map((m) => m.id);

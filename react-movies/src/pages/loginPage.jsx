@@ -8,9 +8,12 @@ const LoginPage = () => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
-    const login = () => {
-        context.authenticate(userName, password);
+    const login = async () => {
+        setErrorMsg("");
+        const ok = await context.authenticate(userName, password);
+        if (!ok) setErrorMsg(context.authError || "Login failed");
     };
 
     let location = useLocation();
@@ -26,6 +29,7 @@ const LoginPage = () => {
         <>
             <h2>Login page</h2>
             <p>You must log in to view the protected pages </p>
+            {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
             <input
               //id="username"
               placeholder="user name"
