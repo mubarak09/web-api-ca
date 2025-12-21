@@ -12,13 +12,15 @@ router.get("/", asyncHandler(async (req, res) => {
 
 // POST add a favourite (logged-in user)
 router.post("/", asyncHandler(async (req, res) => {
-  const { movieId, title, poster_path } = req.body;
+  const { movieId, title, poster_path, release_date, vote_average } = req.body;
 
   const fav = await Favorite.create({
     userId: req.user._id,
     movieId,
     title,
     poster_path,
+    release_date,
+    vote_average
   });
 
   res.status(201).json(fav);

@@ -24,7 +24,7 @@ const FavoriteMoviesPage = () => {
     title: fav.title,
     poster_path: fav.poster_path,
     release_date: fav.release_date,
-    vote_average: 0,
+    vote_average: fav.vote_average,
     favorite: true,
   }));
 

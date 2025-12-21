@@ -7,6 +7,8 @@ const FavoriteSchema = new Schema({
   movieId: { type: Number, required: true },
   title: { type: String, required: true },
   poster_path: { type: String },
+  release_date: { type: String },
+  vote_average: { type: Number, default: 0 },
   created_at: { type: Date, default: Date.now() }, // default value is set to the current date and time when a new document is created
 });
 
